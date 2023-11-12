@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Up Skill Me</title>
+  <link rel="stylesheet" href="../static/style.css"
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>UpSkillMe</h1>
+    </header>
+    <main>
+      <section class="upload-section">
+        <form id="resumeForm" enctype="multipart/form-data">
+          <label for="resume">Upload Resume:</label>
+          <label for="resume" class="custom-file-label">Choose File</label>
+          <input type="file" id="resume" name="resume" accept=".txt, .pdf" onchange="displayFileName()" class="custom-file-input">
+          <span id="file-name"></span>
+          <br>
+          <label for="resume_text">Current skills:</label>
+          <textarea name="resume_text" id="resume_text" cols="10" rows="3"></textarea>
+          <label for="job-description">Job Description:</label>
+          <textarea name="job-description" id="job-description" cols="10" rows="3" required></textarea>
+          <button type="button" onclick="compareResumes()">Compare</button>
+          <br>
+        </form>
+      </section>
+
+      <section class="result-section">
+        <div class="keywords">
+          <h2>Extracted Keywords from Resume</h2>
+          <div id="resume-keywords"></div>
+        </div>
+
+        <div class="keywords">
+          <h2>Matched Keywords from Job Description</h2>
+          <div id="job-description-keywords"></div>
+        </div>
+      </section>
+      <section class="result-section">
+        <div class="recommendations">
+          <h2>Skill Gap Recommendations</h2>
+          <div id="skill-gap-recommendations"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../static/script.js"></script>
+</body>
+</html>

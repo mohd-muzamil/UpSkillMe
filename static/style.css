@@ -1,0 +1,123 @@
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: xx-large;
+  margin: 0;
+  padding: 0;
+  background: #ddd;
+  color: #fff;
+}
+
+.container {
+  /* height and width same as screen */
+  color: #000;
+  font-weight: 200;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 80vh;
+  width: 90vw;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+  /* margin-bottom: 10px; */
+}
+
+input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+.custom-file-input {
+  background-color: #2ecc71; /* Green background color */
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+}
+
+.custom-file-input:hover {
+  background-color: #27ae60; /* Darker green on hover */
+}
+
+.custom-file-label {
+  font-size: 1.2em;
+  padding: 10px;
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hide the default file input and style the custom file input */
+input[type="file"] + .custom-file-input {
+  visibility: hidden;
+}
+
+input[type="file"]:focus + .custom-file-input {
+  outline: 1px dotted #000;
+}
+
+input[type="file"]:valid + .custom-file-input .custom-file-label {
+  border-color: #2ecc71; /* Green border color when a file is selected */
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  font-size: 50px;
+  background-color: #2ecc71; /* Green button color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  /* width: 25%; */
+  /* margin: 0 auto; */
+}
+
+button:hover {
+  background-color: #27ae60; /* Darker green on hover */
+}
+
+textarea {
+  /* resize: none; */
+  font-size: 50px;
+}
+
+.result-section {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.keywords, .recommendations {
+  flex: 1;
+  /* aling text center */
+  text-align: center;
+}
+
+.keywords, .recommendations h2 {
+  margin-bottom: 10px;
+}
+
+.keywords div, .recommendations div {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for result boxes */
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}

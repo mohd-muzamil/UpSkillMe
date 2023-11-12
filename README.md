@@ -1,2 +1,14 @@
-# UpSkillMe
-UpskillMe: Bridging the Gap between Aspirations and Achievements - An AI-powered platform helping users analyze skill sets, identify gaps, and create personalized upskilling roadmaps for career success.
+# Project Name
+
+A brief description of what this project does and who it's for
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+Describe how to install this project and any dependencies that are required.
