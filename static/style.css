@@ -12,8 +12,8 @@ body {
   color: #000;
   font-weight: 200;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  height: 80vh;
-  width: 90vw;
+  /* height: 80vh; */
+  /* width: 90vw; */
   margin: 50px auto;
   background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
   padding: 20px;
@@ -21,8 +21,10 @@ body {
 }
 
 header {
-  text-align: center;
+  /* text-align: center; */
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 label {
@@ -36,6 +38,12 @@ input[type="file"] {
   display: none; /* Hide the default file input */
 }
 
+#avatar-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
 .custom-file-input {
   background-color: #2ecc71; /* Green background color */
   color: #fff;
@@ -120,4 +128,88 @@ textarea {
   padding: 10px;
   border: 1px solid #ddd;
   margin-bottom: 10px;
+}
+
+
+
+/* image styling */
+ul.avatars {
+  margin: 0 auto;
+  padding-top: 30px;
+  list-style: none;
+  overflow: hidden;
+  zoom: 1.0;
+}
+
+.avatars li, .avatars a {
+  float: left;
+  position: relative;
+}
+
+.avatars li img {
+  display: inline;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.avatars li, .avatars a {
+  width: 150px; /* whatever the max size is*/
+  height: 150px; /* whatever the max size is*/
+  line-height: 150px; /* match height */
+  text-align: center;
+}
+
+.avatars li {
+  margin: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.avatar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  color: #000;
+  font-size: 30px; /* Adjust the font size as needed */
+}
+
+
+/* Add your custom styles here */
+.col-10 {
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+.col-90 {
+  flex: 0 0 90%;
+  max-width: 90%;
+}
+
+
+
+/* image grid */
+.result-section {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#gallery div {
+  margin: 50px;
+}
+
+#gallery img {
+  width: 150px;
+  height: 150px;
+  height: auto;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #ddd;
 }

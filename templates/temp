@@ -1,0 +1,8 @@
+<div class="images">
+        <h2>Images</h2>
+        <div id="image-grid" style="display: inline-flex; size: 0cm;">
+          <img src="../static/images/avatar.jpg" alt="Image 1">
+          <img src="../static/images/avatar.jpg" alt="Image 2">
+          <img src="../static/images/avatar.jpg" alt="Image 3">
+        </div>
+</div>

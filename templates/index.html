@@ -5,30 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Up Skill Me</title>
   <link rel="stylesheet" href="../static/style.css"
+
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>UpSkillMe</h1>
+        <a href="#"><img src="../static/images/avatar.png" alt="avatar" width="150" height="150"></a>
+        <h1>UpSkillMe</h1>
     </header>
     <main>
+      
       <section class="upload-section">
         <form id="resumeForm" enctype="multipart/form-data">
-          <label for="resume">Upload Resume:</label>
-          <label for="resume" class="custom-file-label">Choose File</label>
-          <input type="file" id="resume" name="resume" accept=".txt, .pdf" onchange="displayFileName()" class="custom-file-input">
-          <span id="file-name"></span>
-          <br>
-          <label for="resume_text">Current skills:</label>
-          <textarea name="resume_text" id="resume_text" cols="10" rows="3"></textarea>
-          <label for="job-description">Job Description:</label>
-          <textarea name="job-description" id="job-description" cols="10" rows="3" required></textarea>
-          <button type="button" onclick="compareResumes()">Compare</button>
-          <br>
+          <label for="resume">Upload your CV:</label>
+            <label for="resume" class="custom-file-label">Choose File</label>
+            <input type="file" id="resume" name="resume" accept=".txt, .pdf" onchange="displayFileName()" class="custom-file-input">
+            <span id="file-name"></span>
+            <!-- <br> -->
+            <!-- <label for="resume_text">Current skills:</label> -->
+            <!-- <textarea name="resume_text" id="resume_text" cols="10" rows="3"></textarea> -->
+            <label for="job-description">My dream job is:</label>
+            <textarea name="job-description" id="job-description" cols="10" rows="3" required></textarea>
+            <br>
+          <button type="button" onclick="compareResumes()">Submit</button>
         </form>
       </section>
 
       <section class="result-section">
+        <div id="gallery">
+          <div>
+              <p>Progress</p>
+              <img src="../static/images/progress.png" onclick="callProgress()">
+          </div>
+          <div>
+            <p>Upgrade your skills</p>
+            <img src="../static/images/upgrade-your-skills.jpg" onclick="callUpgradeSkills()">
+          </div>
+          <div class="scene">
+            <p>Match jobs</p>
+            <!-- on click on image call function callProgress() -->
+            <img src="../static/images/career-choice.jpg" onclick="callMatchJobs()">
+          </div>
+      </div>
+    </section>
+    
+
+      <!-- <section class="result-section">
         <div class="keywords">
           <h2>Extracted Keywords from Resume</h2>
           <div id="resume-keywords"></div>
@@ -44,9 +66,21 @@
           <h2>Skill Gap Recommendations</h2>
           <div id="skill-gap-recommendations"></div>
         </div>
+      </section> -->
+      <section class="result-section">
+        <div class="recommendations">
+          <div id="recommendations_title"></div>
+          <div id="recommendations">
+        </div>
+        </div>
       </section>
     </main>
   </div>
   <script src="../static/script.js"></script>
+  <!-- Bootstrap JS and Popper.js (optional but recommended for Bootstrap's JavaScript features) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
