@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = './uploads'  # Update this with the actual path
 ALLOWED_EXTENSIONS = {'pdf', 'txt'}
-RESUME_NAME = 'resume.pdf'  # Update this with the actual path
+RESUME_NAME = 'Profile.pdf'  # Update this with the actual path
 JOSB_NAME = 'jobs.csv'  # Update this with the actual path
 SKILLS_NAME = 'skills.csv'  # Update this with the actual path
 GAPS_NAME = 'gaps.csv'  # Update this with the actual path
@@ -26,7 +26,7 @@ GAPS_NAME = 'gaps.csv'  # Update this with the actual path
 CHATGPTRESULTS_FOLDER = './chatgpt'  # Update this with the actual path
 
 ########################################
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "API_Key_here"
 llm = OpenAI(temperature=0.9)  # model_name="text-davinci-003"
 template = """Question: {question}
 
@@ -42,9 +42,9 @@ llm_chain = LLMChain(prompt=prompt, llm=llm)
 
 # print(llm_chain.run(question))
 
-def read_pdf(file_path):
+def read_pdf(file):
     pdf_text = ""
-    with open(file_path, 'rb') as f:
+    with open(file, 'rb') as f:
         pdf = PdfReader(f)
         for page in pdf.pages:
             pdf_text += page.extract_text()
@@ -135,6 +135,12 @@ def explanation_for_each_gap(gap):
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit on file size
+app.config['RESUME_NAME'] = RESUME_NAME
+app.config['JOBS_NAME'] = JOSB_NAME
+app.config['SKILLS_NAME'] = SKILLS_NAME
+app.config['GAPS_NAME'] = GAPS_NAME
+app.config['CHATGPTRESULTS_FOLDER'] = CHATGPTRESULTS_FOLDER
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -162,21 +168,24 @@ def getGapExplanationDataFrame(gap):
 def index():
     return render_template('index.html')
 
-@app.route('/compare', methods=['GET'])
+@app.route('/compare', methods=['POST'])
 def compare_resumes():
     # Get the uploaded file
     resume_file = request.files.get('resume')
     job_description_text = request.form.get('jobDescriptionText', '')
+    # resume_text = request.form.get('resumeText', '')
 
-    print(job_description_text, resume_file)
     # Check if the file is present and has an allowed extension
     if resume_file and resume_file.filename.lower().endswith(('.pdf', '.txt')):
+
         # Save the file to the specified folder
-        # uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(resume_file.filename))
-        # resume_file.save(uploaded_file_path)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(resume_file.filename))
+        resume_file.save(uploaded_file_path)
 
         # Read the contents of the PDF file
-        resume_text_from_file = read_pdf(resume_file)
+        resume_text_from_file = read_pdf(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(resume_file.filename)))
+        # resume_text_from_file = read_pdf(resume_file.filename)
+        # print(resume_text_from_file)
         resume_text_from_file = pre_process(resume_text_from_file)
 
         # Further processing logic...
@@ -189,9 +198,12 @@ def compare_resumes():
             explanation = explanation_for_each_gap(gap)
             gaps_df['explanation'] = explanation
         
-        jobs_df.to_csv(os.path.join(app.config['CHATGPTRESULTS_FOLDER'], app.config['JOBS_NAME']), index=False)
-        skills_df.to_csv(os.path.join(app.config['CHATGPTRESULTS_FOLDER'], app.config['SKILLS_NAME']), index=False)        
-        gaps_df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], app.config['GAPS_NAME']), index=False)
+        # jobs_df.to_csv(os.path.join(app.config['CHATGPTRESULTS_FOLDER'], app.config['JOBS_NAME']), index=False)
+        jobs_df.to_csv(os.path.join('./chatgpt', app.config['JOBS_NAME']), index=False)
+        # skills_df.to_csv(os.path.join(app.config['CHATGPTRESULTS_FOLDER'], app.config['SKILLS_NAME']), index=False)        
+        skills_df.to_csv(os.path.join('./chatgpt', app.config['SKILLS_NAME']), index=False)
+        # gaps_df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], app.config['GAPS_NAME']), index=False)
+        gaps_df.to_csv(os.path.join('./chatgpt', app.config['GAPS_NAME']), index=False)
 
 
         response_data = {
@@ -201,7 +213,8 @@ def compare_resumes():
         # Delete the temporary file after processing
         # os.remove(uploaded_file_path)
 
-        return jsonify(response_data)
+        # return jsonify(response_data)
+        return None
     else:
         return jsonify({'error': 'Invalid file format. Please upload a PDF or TXT file.'}), 400
 
